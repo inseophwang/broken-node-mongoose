@@ -6,6 +6,8 @@ const mongoose = require('mongoose');
 // const User = require('./models/Users');
 const userRoutes = require('./routes/userRoute');
 
+const port = process.env.PORT || 6000
+
 require('dotenv').config();
 
 mongoose
@@ -20,6 +22,8 @@ mongoose
   .catch(err => console.log(`Mongo Error: ${err}`));
 
 app.use(logger('dev'));
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
 
 app.use('/api/users', userRoutes);
 
